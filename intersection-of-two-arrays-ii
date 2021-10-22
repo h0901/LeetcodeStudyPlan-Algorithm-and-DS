@@ -1,30 +1,24 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        vector<int> vec;
-        vector<int> n1,n2;
-        vector<int>::iterator it;
-        int len;
-        if(nums1.size()>=nums2.size())
-        {
-            len=nums1.size();
-            n1=nums1;
-            n2=nums2;
+        vector<int> res;
+			int h1[1001]={0};
+			int h2[1001]={0};
+			for(auto it : nums1) 
+					h1[it]++;   //counting frequency of numbers
+			for(auto it : nums2)
+					h2[it]++;
+			for(int i = 0; i < 1001 ; i++)
+			{
+				if(h1[i] == h2[i])
+					while(h1[i]--)
+						res.push_back(i);
+				else if(h1[i] > 0 and h2[i] > 0) {
+					int tem = min(h1[i],h2[i]);
+					while(tem--)
+						res.push_back(i);
+				}
         }
-        else
-        {
-            len=nums2.size();
-            n2=nums1;
-            n1=nums2;
-        }
-        for(int i=0;i<n1.size();i++)
-        {
-            it=find(n2.begin(),n2.end(),n1[i]);
-            if(it!=n2.end())
-            {
-                vec.push_back(n1[i]);
-            }  
-        }
-        return vec;
+        return res;
     }
 };
