@@ -4,16 +4,17 @@ class Solution {
         unordered_map <char,int> mp;
         for(int i=0;i<s.length();i++)
             mp[s[i]]++;
-        int min=INT_MAX;
-        int index=-1;
-        for(int i=0;i<s.length();i++)
+        int i;
+        for(i=0;i<s.length();i++)
         {
-            if(mp[s[i]] < min)
+            if(mp[s[i]]==1)
             {
-                min=mp[s[i]];
-                index=i;
+                break;
             }
         }
-        return index;
+        if(i==s.length())
+            return -1;
+        else
+            return i;
     }
 };
